@@ -1,0 +1,83 @@
+#### general settings
+name: DANx4_setting1
+use_tb_logger: true
+model: blind
+distortion: sr
+scale: 4
+gpu_ids: [0, 1]
+pca_matrix_path: /share/home/104632/jiancong/NLCUnet/pca_matrix/NLCUnet/pca_matrix.pth
+
+degradation:
+  random_kernel: True
+  ksize: 21
+  code_length: 10
+  sig_min: 0.2
+  sig_max: 4.0
+  rate_iso: 1.0
+  random_disturb: false
+
+#### datasets
+datasets:
+  train:
+    name: DIV2K
+    mode: GT
+    dataroot_GT: /share/home/104632/jiancong/DIV2K-Flickr2K-lmdb-new/DIV2K-Flickr2K-lmdb-new.lmdb
+
+    use_shuffle: true
+    n_workers: 8  # per GPU
+    batch_size: 4
+    GT_size: 256
+    LR_size: 64
+    use_flip: true
+    use_rot: true
+    color: RGB
+  val:
+    name: SET5
+    mode: LQGT
+    dataroot_GT: /share/home/104632/jiancong/Set5-unet-lmdb/hr.lmdb
+    dataroot_LQ: /share/home/104632/jiancong/Set5-unet-lmdb/lr_blur.lmdb
+
+#### network structures
+network_G:
+  which_model_G: NLCUnet
+  setting:
+    nf: 64
+    nb: 25
+    input_para: 10
+    loop: 1
+    kernel_size: 21
+    rate1: ~
+    rate2: ~
+    rate3: ~
+    rate4: ~
+    rate5: ~
+
+#### path
+path:
+  pretrain_model_G: ~
+  strict_load: true
+  resume_state: ~
+
+#### training settings: learning rate scheme, loss
+train:
+  lr_G: !!float 4e-4
+  lr_scheme: MultiStepLR
+  beta1: 0.9
+  beta2: 0.99
+  niter: 1200000
+  warmup_iter: -1  # no warm up
+  lr_steps: [300000, 600000, 900000]
+  lr_gamma: 0.5
+  eta_min: !!float 1e-7
+
+  pixel_criterion: l1
+  pixel_weight: 1.0
+
+  manual_seed: 0
+#  val_freq: 5
+  val_freq: !!float 2.5e3
+
+#### logger
+logger:
+  print_freq: 20
+  save_checkpoint_freq: !!float 2.5e3

@@ -1,0 +1,1674 @@
+22-11-30 21:36:00.436 - INFO:   name: DANx4_setting2
+  suffix: None
+  model: blind
+  distortion: sr
+  scale: 4
+  crop_border: None
+  gpu_ids: [0]
+  pca_matrix_path: /share/home/104632/jiancong/DAN-unet/pca_matrix/DANv1/pca_aniso_matrix_x4.pth
+  datasets:[
+    test0:[
+      name: DIV2KRK
+      mode: LQGT
+      dataroot_GT: /share/home/104632/jiancong/DIV2KRK_crop-lmdbx4/hr.lmdb
+      dataroot_LQ: /share/home/104632/jiancong/DIV2KRK_crop_LRblur-lmdbx4/lr_blur.lmdb
+      phase: test0
+      scale: 4
+      data_type: lmdb
+    ]
+  ]
+  network_G:[
+    which_model_G: DAN
+    setting:[
+      nf: 64
+      nb: 25
+      input_para: 10
+      loop: 1
+      kernel_size: 31
+      pca_matrix_path: /share/home/104632/jiancong/DAN-unet/pca_matrix/DANv1/pca_aniso_matrix_x4.pth
+      upscale: 4
+    ]
+  ]
+  path:[
+    pretrain_model_G: /share/home/104632/jiancong/DAN-unet/experiments/DANv1/DANx4_setting2/models/900000_G.pth
+    root: /share/home/104632/jiancong/DAN-unet
+    results_root: /share/home/104632/jiancong/DAN-unet/results/DANv1/DANx4_setting2
+    log: /share/home/104632/jiancong/DAN-unet/results/DANv1/DANx4_setting2
+  ]
+  is_train: False
+
+22-11-30 21:36:00.462 - INFO: Dataset [LQGTDataset - DIV2KRK] is created.
+22-11-30 21:36:00.463 - INFO: Number of test images in [DIV2KRK]: 100
+22-11-30 21:36:04.027 - INFO: Network G structure: DataParallel - DAN, with parameters: 18,113,619
+22-11-30 21:36:04.027 - INFO: DAN(
+  (Restorer): Restorer(
+    (head): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (encoder_block1): Sequential(
+      (0): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(64, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64)
+          (1): GELU()
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64)
+        )
+        (conv1_last): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(64, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(4, 64, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(64, 340, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(340, 340, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=340, bias=False)
+          (project_out): Conv2d(170, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (1): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(64, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64)
+          (1): GELU()
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64)
+        )
+        (conv1_last): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(64, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(4, 64, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(64, 340, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(340, 340, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=340, bias=False)
+          (project_out): Conv2d(170, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (2): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(64, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64)
+          (1): GELU()
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64)
+        )
+        (conv1_last): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(64, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(4, 64, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(64, 340, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(340, 340, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=340, bias=False)
+          (project_out): Conv2d(170, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (3): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(64, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64)
+          (1): GELU()
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64)
+        )
+        (conv1_last): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(64, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(4, 64, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(64, 340, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(340, 340, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=340, bias=False)
+          (project_out): Conv2d(170, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (4): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(64, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64)
+          (1): GELU()
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64)
+        )
+        (conv1_last): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(64, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(4, 64, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(64, 340, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(340, 340, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=340, bias=False)
+          (project_out): Conv2d(170, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (5): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(64, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64)
+          (1): GELU()
+          (2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=64)
+        )
+        (conv1_last): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(64, 4, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(4, 64, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(64, 340, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(340, 340, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=340, bias=False)
+          (project_out): Conv2d(170, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+    )
+    (down1): UnetDownsample(
+      (body): Sequential(
+        (0): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): PixelUnshuffle(downscale_factor=2)
+      )
+    )
+    (encoder_block2): Sequential(
+      (0): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (1): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (2): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (3): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (4): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (5): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (6): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (7): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+    )
+    (down2): UnetDownsample(
+      (body): Sequential(
+        (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): PixelUnshuffle(downscale_factor=2)
+      )
+    )
+    (latent_block): Sequential(
+      (0): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+          (1): GELU()
+          (2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+        )
+        (conv1_last): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(256, 1360, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(1360, 1360, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=1360, bias=False)
+          (project_out): Conv2d(680, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (1): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+          (1): GELU()
+          (2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+        )
+        (conv1_last): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(256, 1360, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(1360, 1360, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=1360, bias=False)
+          (project_out): Conv2d(680, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (2): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+          (1): GELU()
+          (2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+        )
+        (conv1_last): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(256, 1360, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(1360, 1360, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=1360, bias=False)
+          (project_out): Conv2d(680, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (3): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+          (1): GELU()
+          (2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+        )
+        (conv1_last): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(256, 1360, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(1360, 1360, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=1360, bias=False)
+          (project_out): Conv2d(680, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (4): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+          (1): GELU()
+          (2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+        )
+        (conv1_last): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(256, 1360, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(1360, 1360, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=1360, bias=False)
+          (project_out): Conv2d(680, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (5): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+          (1): GELU()
+          (2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+        )
+        (conv1_last): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(256, 1360, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(1360, 1360, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=1360, bias=False)
+          (project_out): Conv2d(680, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (6): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+          (1): GELU()
+          (2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+        )
+        (conv1_last): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(256, 1360, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(1360, 1360, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=1360, bias=False)
+          (project_out): Conv2d(680, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (7): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+          (1): GELU()
+          (2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+        )
+        (conv1_last): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(256, 1360, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(1360, 1360, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=1360, bias=False)
+          (project_out): Conv2d(680, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (8): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+          (1): GELU()
+          (2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+        )
+        (conv1_last): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(256, 1360, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(1360, 1360, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=1360, bias=False)
+          (project_out): Conv2d(680, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (9): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+          (1): GELU()
+          (2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=256)
+        )
+        (conv1_last): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(256, 1360, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(1360, 1360, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=1360, bias=False)
+          (project_out): Conv2d(680, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+    )
+    (up1): UnetUpsample(
+      (body): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): PixelShuffle(upscale_factor=2)
+      )
+    )
+    (conv1x1_1): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+    (decoder_block1): Sequential(
+      (0): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (1): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (2): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (3): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (4): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (5): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+    )
+    (up2): UnetUpsample(
+      (body): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (1): PixelShuffle(upscale_factor=2)
+      )
+    )
+    (decoder_block2): Sequential(
+      (0): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (1): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (2): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (3): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (4): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (5): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (6): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (7): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+    )
+    (refine_block): Sequential(
+      (0): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (1): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (2): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (3): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (4): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (5): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (6): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+      (7): CRB_Layer(
+        (norm1): LayerNorm2d()
+        (nla): NonLocalSparseAttention(
+          (conv_match): BasicBlock(
+            (0): Conv2d(128, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          )
+          (conv_assembly): BasicBlock(
+            (0): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+          )
+        )
+        (conv_local): Sequential(
+          (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+          (1): GELU()
+          (2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=128)
+        )
+        (conv1_last): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1))
+        (ca): CALayer(
+          (body): Sequential(
+            (0): Conv2d(128, 8, kernel_size=(1, 1), stride=(1, 1))
+            (1): GELU()
+            (2): Conv2d(8, 128, kernel_size=(1, 1), stride=(1, 1))
+            (3): Sigmoid()
+          )
+          (avg): AdaptiveAvgPool2d(output_size=1)
+        )
+        (norm2): LayerNorm2d()
+        (gdfn): FeedForward(
+          (project_in): Conv2d(128, 680, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (dwconv): Conv2d(680, 680, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=680, bias=False)
+          (project_out): Conv2d(340, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        )
+      )
+    )
+    (fusion): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (upscale): Sequential(
+      (0): Conv2d(64, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): PixelShuffle(upscale_factor=2)
+      (2): Conv2d(64, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (3): PixelShuffle(upscale_factor=2)
+      (4): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+)
+22-11-30 21:36:04.028 - INFO: Loading model for G [/share/home/104632/jiancong/DAN-unet/experiments/DANv1/DANx4_setting2/models/900000_G.pth] ...
+22-11-30 21:36:04.872 - INFO: Model [B_Model] is created.
+22-11-30 21:36:04.872 - INFO: 
+Testing [DIV2KRK]...
+22-11-30 21:36:06.462 - INFO: img:img_100_gt      - PSNR: 24.001970 dB; SSIM: 0.778328; PSNR_Y: 25.188310 dB; SSIM_Y: 0.801817.
+22-11-30 21:36:07.680 - INFO: img:img_10_gt       - PSNR: 21.380601 dB; SSIM: 0.466738; PSNR_Y: 22.516928 dB; SSIM_Y: 0.495381.
+22-11-30 21:36:08.896 - INFO: img:img_11_gt       - PSNR: 27.387188 dB; SSIM: 0.728813; PSNR_Y: 28.408036 dB; SSIM_Y: 0.753905.
+22-11-30 21:36:10.106 - INFO: img:img_12_gt       - PSNR: 28.646147 dB; SSIM: 0.818228; PSNR_Y: 29.904539 dB; SSIM_Y: 0.839568.
+22-11-30 21:36:11.319 - INFO: img:img_13_gt       - PSNR: 25.873224 dB; SSIM: 0.787245; PSNR_Y: 27.239013 dB; SSIM_Y: 0.810142.
+22-11-30 21:36:12.521 - INFO: img:img_14_gt       - PSNR: 25.958976 dB; SSIM: 0.847735; PSNR_Y: 27.393515 dB; SSIM_Y: 0.866146.
+22-11-30 21:36:13.725 - INFO: img:img_15_gt       - PSNR: 28.881212 dB; SSIM: 0.795027; PSNR_Y: 31.763728 dB; SSIM_Y: 0.823088.
+22-11-30 21:36:14.935 - INFO: img:img_16_gt       - PSNR: 29.653937 dB; SSIM: 0.766236; PSNR_Y: 30.991412 dB; SSIM_Y: 0.793698.
+22-11-30 21:36:16.179 - INFO: img:img_17_gt       - PSNR: 26.254569 dB; SSIM: 0.775992; PSNR_Y: 27.955948 dB; SSIM_Y: 0.800189.
+22-11-30 21:36:17.395 - INFO: img:img_18_gt       - PSNR: 23.157398 dB; SSIM: 0.789391; PSNR_Y: 24.592102 dB; SSIM_Y: 0.806671.
+22-11-30 21:36:18.609 - INFO: img:img_19_gt       - PSNR: 27.512718 dB; SSIM: 0.807769; PSNR_Y: 28.962451 dB; SSIM_Y: 0.828710.
+22-11-30 21:36:19.824 - INFO: img:img_1_gt        - PSNR: 33.126340 dB; SSIM: 0.900974; PSNR_Y: 34.533066 dB; SSIM_Y: 0.918983.
+22-11-30 21:36:21.070 - INFO: img:img_20_gt       - PSNR: 24.051728 dB; SSIM: 0.775522; PSNR_Y: 25.467507 dB; SSIM_Y: 0.796042.
+22-11-30 21:36:22.283 - INFO: img:img_21_gt       - PSNR: 27.753305 dB; SSIM: 0.882938; PSNR_Y: 29.114081 dB; SSIM_Y: 0.904389.
+22-11-30 21:36:23.497 - INFO: img:img_22_gt       - PSNR: 26.823581 dB; SSIM: 0.707352; PSNR_Y: 28.271078 dB; SSIM_Y: 0.739326.
+22-11-30 21:36:24.708 - INFO: img:img_23_gt       - PSNR: 23.010950 dB; SSIM: 0.708209; PSNR_Y: 24.373815 dB; SSIM_Y: 0.733592.
+22-11-30 21:36:25.919 - INFO: img:img_24_gt       - PSNR: 21.749991 dB; SSIM: 0.720853; PSNR_Y: 23.145696 dB; SSIM_Y: 0.736516.
+22-11-30 21:36:27.132 - INFO: img:img_25_gt       - PSNR: 22.271421 dB; SSIM: 0.738231; PSNR_Y: 23.644857 dB; SSIM_Y: 0.756940.
+22-11-30 21:36:28.335 - INFO: img:img_26_gt       - PSNR: 19.381539 dB; SSIM: 0.466695; PSNR_Y: 20.594169 dB; SSIM_Y: 0.483011.
+22-11-30 21:36:29.549 - INFO: img:img_27_gt       - PSNR: 29.167978 dB; SSIM: 0.845666; PSNR_Y: 30.476477 dB; SSIM_Y: 0.869544.
+22-11-30 21:36:30.754 - INFO: img:img_28_gt       - PSNR: 14.888655 dB; SSIM: 0.647041; PSNR_Y: 15.797367 dB; SSIM_Y: 0.685682.
+22-11-30 21:36:31.967 - INFO: img:img_29_gt       - PSNR: 23.444362 dB; SSIM: 0.529471; PSNR_Y: 24.766930 dB; SSIM_Y: 0.565069.
+22-11-30 21:36:33.178 - INFO: img:img_2_gt        - PSNR: 31.457691 dB; SSIM: 0.837958; PSNR_Y: 33.327605 dB; SSIM_Y: 0.864978.
+22-11-30 21:36:34.392 - INFO: img:img_30_gt       - PSNR: 21.025398 dB; SSIM: 0.567426; PSNR_Y: 22.476800 dB; SSIM_Y: 0.592143.
+22-11-30 21:36:35.602 - INFO: img:img_31_gt       - PSNR: 26.624657 dB; SSIM: 0.799845; PSNR_Y: 28.023409 dB; SSIM_Y: 0.819647.
+22-11-30 21:36:36.810 - INFO: img:img_32_gt       - PSNR: 30.192419 dB; SSIM: 0.920972; PSNR_Y: 31.890895 dB; SSIM_Y: 0.936892.
+22-11-30 21:36:38.010 - INFO: img:img_33_gt       - PSNR: 29.392226 dB; SSIM: 0.871310; PSNR_Y: 30.752348 dB; SSIM_Y: 0.894660.
+22-11-30 21:36:39.219 - INFO: img:img_34_gt       - PSNR: 27.415872 dB; SSIM: 0.758080; PSNR_Y: 28.772407 dB; SSIM_Y: 0.783558.
+22-11-30 21:36:40.434 - INFO: img:img_35_gt       - PSNR: 22.851555 dB; SSIM: 0.602209; PSNR_Y: 24.251311 dB; SSIM_Y: 0.625834.
+22-11-30 21:36:41.648 - INFO: img:img_36_gt       - PSNR: 22.911356 dB; SSIM: 0.663855; PSNR_Y: 24.217045 dB; SSIM_Y: 0.694157.
+22-11-30 21:36:42.869 - INFO: img:img_37_gt       - PSNR: 23.995557 dB; SSIM: 0.760800; PSNR_Y: 25.349727 dB; SSIM_Y: 0.780832.
+22-11-30 21:36:44.082 - INFO: img:img_38_gt       - PSNR: 36.670676 dB; SSIM: 0.891529; PSNR_Y: 38.434283 dB; SSIM_Y: 0.917384.
+22-11-30 21:36:45.292 - INFO: img:img_39_gt       - PSNR: 30.392148 dB; SSIM: 0.793269; PSNR_Y: 31.631565 dB; SSIM_Y: 0.819483.
+22-11-30 21:36:46.502 - INFO: img:img_3_gt        - PSNR: 31.117036 dB; SSIM: 0.906794; PSNR_Y: 32.510139 dB; SSIM_Y: 0.928067.
+22-11-30 21:36:47.721 - INFO: img:img_40_gt       - PSNR: 26.108404 dB; SSIM: 0.758583; PSNR_Y: 27.464141 dB; SSIM_Y: 0.778540.
+22-11-30 21:36:48.978 - INFO: img:img_41_gt       - PSNR: 23.449626 dB; SSIM: 0.711680; PSNR_Y: 24.834493 dB; SSIM_Y: 0.730894.
+22-11-30 21:36:50.189 - INFO: img:img_42_gt       - PSNR: 28.800235 dB; SSIM: 0.739125; PSNR_Y: 30.099693 dB; SSIM_Y: 0.766959.
+22-11-30 21:36:51.400 - INFO: img:img_43_gt       - PSNR: 29.220823 dB; SSIM: 0.869534; PSNR_Y: 30.984845 dB; SSIM_Y: 0.907679.
+22-11-30 21:36:52.594 - INFO: img:img_44_gt       - PSNR: 33.621800 dB; SSIM: 0.976461; PSNR_Y: 35.391535 dB; SSIM_Y: 0.983775.
+22-11-30 21:36:53.843 - INFO: img:img_45_gt       - PSNR: 24.674848 dB; SSIM: 0.796085; PSNR_Y: 25.951274 dB; SSIM_Y: 0.819290.
+22-11-30 21:36:55.056 - INFO: img:img_46_gt       - PSNR: 17.745201 dB; SSIM: 0.598473; PSNR_Y: 19.066567 dB; SSIM_Y: 0.621060.
+22-11-30 21:36:56.266 - INFO: img:img_47_gt       - PSNR: 23.131588 dB; SSIM: 0.735117; PSNR_Y: 24.635880 dB; SSIM_Y: 0.761550.
+22-11-30 21:36:57.484 - INFO: img:img_48_gt       - PSNR: 21.570571 dB; SSIM: 0.621060; PSNR_Y: 22.904044 dB; SSIM_Y: 0.653198.
+22-11-30 21:36:58.701 - INFO: img:img_49_gt       - PSNR: 20.564306 dB; SSIM: 0.715546; PSNR_Y: 22.017028 dB; SSIM_Y: 0.731788.
+22-11-30 21:36:59.917 - INFO: img:img_4_gt        - PSNR: 26.673753 dB; SSIM: 0.771600; PSNR_Y: 28.049197 dB; SSIM_Y: 0.798231.
+22-11-30 21:37:01.128 - INFO: img:img_50_gt       - PSNR: 25.570260 dB; SSIM: 0.778090; PSNR_Y: 27.042066 dB; SSIM_Y: 0.800240.
+22-11-30 21:37:02.346 - INFO: img:img_51_gt       - PSNR: 24.044854 dB; SSIM: 0.763994; PSNR_Y: 25.388116 dB; SSIM_Y: 0.794105.
+22-11-30 21:37:03.555 - INFO: img:img_52_gt       - PSNR: 26.480297 dB; SSIM: 0.789523; PSNR_Y: 27.591921 dB; SSIM_Y: 0.809855.
+22-11-30 21:37:04.768 - INFO: img:img_53_gt       - PSNR: 28.123910 dB; SSIM: 0.883175; PSNR_Y: 30.059569 dB; SSIM_Y: 0.911137.
+22-11-30 21:37:05.989 - INFO: img:img_54_gt       - PSNR: 22.017628 dB; SSIM: 0.608732; PSNR_Y: 23.319353 dB; SSIM_Y: 0.632049.
+22-11-30 21:37:07.200 - INFO: img:img_55_gt       - PSNR: 28.757085 dB; SSIM: 0.668219; PSNR_Y: 30.151889 dB; SSIM_Y: 0.713888.
+22-11-30 21:37:08.419 - INFO: img:img_56_gt       - PSNR: 23.346637 dB; SSIM: 0.612427; PSNR_Y: 25.810913 dB; SSIM_Y: 0.637713.
+22-11-30 21:37:09.641 - INFO: img:img_57_gt       - PSNR: 33.752513 dB; SSIM: 0.842438; PSNR_Y: 35.313536 dB; SSIM_Y: 0.874720.
+22-11-30 21:37:10.868 - INFO: img:img_58_gt       - PSNR: 23.953743 dB; SSIM: 0.630960; PSNR_Y: 25.345654 dB; SSIM_Y: 0.645729.
+22-11-30 21:37:12.082 - INFO: img:img_59_gt       - PSNR: 21.640447 dB; SSIM: 0.571141; PSNR_Y: 22.910579 dB; SSIM_Y: 0.594056.
+22-11-30 21:37:13.292 - INFO: img:img_5_gt        - PSNR: 28.339547 dB; SSIM: 0.736587; PSNR_Y: 29.717425 dB; SSIM_Y: 0.766481.
+22-11-30 21:37:14.530 - INFO: img:img_60_gt       - PSNR: 20.289631 dB; SSIM: 0.586425; PSNR_Y: 21.727644 dB; SSIM_Y: 0.601835.
+22-11-30 21:37:15.754 - INFO: img:img_61_gt       - PSNR: 20.845760 dB; SSIM: 0.655104; PSNR_Y: 22.156956 dB; SSIM_Y: 0.673258.
+22-11-30 21:37:16.979 - INFO: img:img_62_gt       - PSNR: 28.937748 dB; SSIM: 0.609703; PSNR_Y: 30.366169 dB; SSIM_Y: 0.658048.
+22-11-30 21:37:18.187 - INFO: img:img_63_gt       - PSNR: 29.166541 dB; SSIM: 0.752654; PSNR_Y: 30.527118 dB; SSIM_Y: 0.783967.
+22-11-30 21:37:19.550 - INFO: img:img_64_gt       - PSNR: 29.188904 dB; SSIM: 0.732686; PSNR_Y: 30.435875 dB; SSIM_Y: 0.760002.
+22-11-30 21:37:20.772 - INFO: img:img_65_gt       - PSNR: 26.777194 dB; SSIM: 0.695118; PSNR_Y: 28.203574 dB; SSIM_Y: 0.723995.
+22-11-30 21:37:22.000 - INFO: img:img_66_gt       - PSNR: 33.110277 dB; SSIM: 0.863819; PSNR_Y: 34.796811 dB; SSIM_Y: 0.898267.
+22-11-30 21:37:23.223 - INFO: img:img_67_gt       - PSNR: 24.662737 dB; SSIM: 0.786797; PSNR_Y: 25.722525 dB; SSIM_Y: 0.800275.
+22-11-30 21:37:24.438 - INFO: img:img_68_gt       - PSNR: 24.919344 dB; SSIM: 0.797001; PSNR_Y: 26.229752 dB; SSIM_Y: 0.813093.
+22-11-30 21:37:25.646 - INFO: img:img_69_gt       - PSNR: 19.586414 dB; SSIM: 0.518067; PSNR_Y: 20.964758 dB; SSIM_Y: 0.536026.
+22-11-30 21:37:26.852 - INFO: img:img_6_gt        - PSNR: 25.401865 dB; SSIM: 0.821298; PSNR_Y: 27.845359 dB; SSIM_Y: 0.832887.
+22-11-30 21:37:28.064 - INFO: img:img_70_gt       - PSNR: 26.010387 dB; SSIM: 0.780813; PSNR_Y: 27.310461 dB; SSIM_Y: 0.800176.
+22-11-30 21:37:29.273 - INFO: img:img_71_gt       - PSNR: 28.052785 dB; SSIM: 0.802304; PSNR_Y: 29.719096 dB; SSIM_Y: 0.822878.
+22-11-30 21:37:30.486 - INFO: img:img_72_gt       - PSNR: 21.199782 dB; SSIM: 0.574746; PSNR_Y: 22.449115 dB; SSIM_Y: 0.603217.
+22-11-30 21:37:31.703 - INFO: img:img_73_gt       - PSNR: 21.624946 dB; SSIM: 0.609688; PSNR_Y: 22.965333 dB; SSIM_Y: 0.632036.
+22-11-30 21:37:32.912 - INFO: img:img_74_gt       - PSNR: 26.833967 dB; SSIM: 0.775527; PSNR_Y: 28.223408 dB; SSIM_Y: 0.798699.
+22-11-30 21:37:34.120 - INFO: img:img_75_gt       - PSNR: 22.440085 dB; SSIM: 0.534064; PSNR_Y: 23.632756 dB; SSIM_Y: 0.561141.
+22-11-30 21:37:35.334 - INFO: img:img_76_gt       - PSNR: 21.383377 dB; SSIM: 0.489611; PSNR_Y: 22.505358 dB; SSIM_Y: 0.519085.
+22-11-30 21:37:36.543 - INFO: img:img_77_gt       - PSNR: 33.393203 dB; SSIM: 0.936517; PSNR_Y: 34.895594 dB; SSIM_Y: 0.948636.
+22-11-30 21:37:37.751 - INFO: img:img_78_gt       - PSNR: 28.120572 dB; SSIM: 0.850044; PSNR_Y: 29.586079 dB; SSIM_Y: 0.869581.
+22-11-30 21:37:38.958 - INFO: img:img_79_gt       - PSNR: 22.495891 dB; SSIM: 0.725940; PSNR_Y: 23.816438 dB; SSIM_Y: 0.745364.
+22-11-30 21:37:40.167 - INFO: img:img_7_gt        - PSNR: 21.718899 dB; SSIM: 0.562775; PSNR_Y: 24.424061 dB; SSIM_Y: 0.616623.
+22-11-30 21:37:41.385 - INFO: img:img_80_gt       - PSNR: 27.841082 dB; SSIM: 0.747073; PSNR_Y: 29.211451 dB; SSIM_Y: 0.772850.
+22-11-30 21:37:42.607 - INFO: img:img_81_gt       - PSNR: 21.829064 dB; SSIM: 0.512944; PSNR_Y: 23.242577 dB; SSIM_Y: 0.539863.
+22-11-30 21:37:43.824 - INFO: img:img_82_gt       - PSNR: 23.652734 dB; SSIM: 0.746432; PSNR_Y: 24.995962 dB; SSIM_Y: 0.769401.
+22-11-30 21:37:45.050 - INFO: img:img_83_gt       - PSNR: 23.870013 dB; SSIM: 0.627493; PSNR_Y: 25.662680 dB; SSIM_Y: 0.658964.
+22-11-30 21:37:46.258 - INFO: img:img_84_gt       - PSNR: 22.860227 dB; SSIM: 0.642292; PSNR_Y: 24.568105 dB; SSIM_Y: 0.676340.
+22-11-30 21:37:47.465 - INFO: img:img_85_gt       - PSNR: 21.635449 dB; SSIM: 0.474199; PSNR_Y: 22.946872 dB; SSIM_Y: 0.499872.
+22-11-30 21:37:48.676 - INFO: img:img_86_gt       - PSNR: 28.607619 dB; SSIM: 0.872750; PSNR_Y: 30.865225 dB; SSIM_Y: 0.897019.
+22-11-30 21:37:49.875 - INFO: img:img_87_gt       - PSNR: 21.642731 dB; SSIM: 0.727889; PSNR_Y: 22.830140 dB; SSIM_Y: 0.743493.
+22-11-30 21:37:51.085 - INFO: img:img_88_gt       - PSNR: 27.336087 dB; SSIM: 0.895576; PSNR_Y: 28.877880 dB; SSIM_Y: 0.909738.
+22-11-30 21:37:52.319 - INFO: img:img_89_gt       - PSNR: 27.913326 dB; SSIM: 0.856030; PSNR_Y: 29.386036 dB; SSIM_Y: 0.874516.
+22-11-30 21:37:53.523 - INFO: img:img_8_gt        - PSNR: 21.465433 dB; SSIM: 0.520515; PSNR_Y: 22.790919 dB; SSIM_Y: 0.542497.
+22-11-30 21:37:54.733 - INFO: img:img_90_gt       - PSNR: 23.809228 dB; SSIM: 0.628214; PSNR_Y: 25.169629 dB; SSIM_Y: 0.653788.
+22-11-30 21:37:55.939 - INFO: img:img_91_gt       - PSNR: 26.377467 dB; SSIM: 0.833045; PSNR_Y: 27.720220 dB; SSIM_Y: 0.859944.
+22-11-30 21:37:57.139 - INFO: img:img_92_gt       - PSNR: 25.491023 dB; SSIM: 0.859922; PSNR_Y: 26.886505 dB; SSIM_Y: 0.870296.
+22-11-30 21:37:58.339 - INFO: img:img_93_gt       - PSNR: 30.951440 dB; SSIM: 0.763469; PSNR_Y: 32.567894 dB; SSIM_Y: 0.807897.
+22-11-30 21:37:59.546 - INFO: img:img_94_gt       - PSNR: 28.622233 dB; SSIM: 0.911238; PSNR_Y: 30.156032 dB; SSIM_Y: 0.922433.
+22-11-30 21:38:00.755 - INFO: img:img_95_gt       - PSNR: 23.893093 dB; SSIM: 0.607044; PSNR_Y: 25.197395 dB; SSIM_Y: 0.638394.
+22-11-30 21:38:02.206 - INFO: img:img_96_gt       - PSNR: 31.130150 dB; SSIM: 0.911344; PSNR_Y: 32.502241 dB; SSIM_Y: 0.931791.
+22-11-30 21:38:03.424 - INFO: img:img_97_gt       - PSNR: 21.077854 dB; SSIM: 0.639044; PSNR_Y: 22.218007 dB; SSIM_Y: 0.676059.
+22-11-30 21:38:04.623 - INFO: img:img_98_gt       - PSNR: 27.290837 dB; SSIM: 0.857929; PSNR_Y: 28.917200 dB; SSIM_Y: 0.875312.
+22-11-30 21:38:05.833 - INFO: img:img_99_gt       - PSNR: 24.411152 dB; SSIM: 0.766535; PSNR_Y: 25.545330 dB; SSIM_Y: 0.793247.
+22-11-30 21:38:07.048 - INFO: img:img_9_gt        - PSNR: 29.962874 dB; SSIM: 0.817726; PSNR_Y: 31.460499 dB; SSIM_Y: 0.839168.
+22-11-30 21:38:07.048 - INFO: ----Average PSNR/SSIM results for DIV2KRK----
+	PSNR: 25.678439 dB; SSIM: 0.735165
+
+22-11-30 21:38:07.048 - INFO: ----Y channel, average PSNR/SSIM----
+	PSNR_Y: 27.130113 dB; SSIM_Y: 0.759510
+
